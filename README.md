@@ -1,27 +1,59 @@
-# MyPro00001
+# angular 框架搭建步骤
+我们的计划为：
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
+ - 一个模块中包含多个页面 
+	 - a 
+		 - a.module.ts(一次性加载所有组件)
+		 - a1Component
+		 - a2Componenta
+	 - b
+		 - b.module.ts（懒加载所有组件）
+		 - b1Component
+		 - b2Component
 
-## Development server
+```
+ng new myPro0001
+ng g c main --spec=false
+ng g c main/content --spec=false
+ng g c main/footer --spec=false
+ng g c main/header --spec=false
+ng g c main/navbar --spec=false
+```
+主体框架搭建好 开始content内部搭建
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+ng g m main/content/a
+ng g c main/content/a/a1Component --spec=false
+ng g c main/content/a/a2Component --spec=false
 
-## Code scaffolding
+ng g m main/content/b
+ng g c main/content/b/b1Component --spec=false
+ng g c main/content/b/b2Component --spec=false
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ng g m main/content/c
+ng g m main/content/c/c1
 
-## Build
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+*app.component.html*
+```
+<app-main></app-main>
+```
+*app.module.ts*
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+> 导入MainModule
 
-## Running end-to-end tests
+*main.module.ts*
+> 导出MainComponent 
+> 导入RouterModule   是因为content.component.html用到了router-outlet
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
+imports:[
+RouterModule
+],
+  exports:[
+    MainComponent,
+  ]
+```
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
